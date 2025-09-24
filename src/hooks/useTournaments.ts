@@ -11,6 +11,7 @@ interface UseTournamentsReturn {
   refetch: () => void;
 }
 
+
 export function useTournaments(): UseTournamentsReturn {
   const [tournaments, setTournaments] = useState<Tournament[]>([]);
   const [loading, setLoading] = useState(true);

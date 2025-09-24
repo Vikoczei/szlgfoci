@@ -189,14 +189,17 @@ const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
             </Box>
 
             {/* Score */}
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
-                {match.team1_score}
-              </Typography>
-              <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
-              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
-                {match.team2_score}
-              </Typography>
+            <Box sx={{ textAlign: 'center' }}>
+              {/* <SoccerIcon sx={{ fontSize: 40, color: '#4285f4', mb: 1 }} /> */}
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                  {match.team1_score === undefined ? match.team1_score : 0}
+                </Typography>
+                <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
+                <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                  {match.team2_score === undefined ? match.team2_score : 0}
+                </Typography>
+              </Box>
             </Box>
 
             {/* Away Team */}
