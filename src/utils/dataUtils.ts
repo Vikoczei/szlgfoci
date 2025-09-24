@@ -47,7 +47,7 @@ export const convertStandingSchemaToStanding = (standingSchema: StandingSchema):
     goals_against: standingSchema.kapott,
     goal_difference: standingSchema.golarany,
     points: standingSchema.points,
-    position: 1, // Will be calculated later
+    position: standingSchema.position,
     // For compatibility with existing code
     id: standingSchema.id,
     name: standingSchema.nev,
@@ -96,8 +96,8 @@ export const formatMatch = (match: ApiMatch, teams: Team[] = []): Match => {
     tournament: match.tournament?.id || 1,
     team1: match.team1?.id || 0,
     team2: match.team2?.id || 0,
-    team1_score: null,
-    team2_score: null,
+    team1_score: match.team1_score || null,
+    team2_score: match.team2_score || null,
     date: match.datetime,
     venue: 'SZLG Sportpálya',
     referee: match.referee?.id || null,
@@ -106,8 +106,8 @@ export const formatMatch = (match: ApiMatch, teams: Team[] = []): Match => {
     awayTeam: awayTeam?.tagozat || awayTeam?.name || `Team ${match.team2?.id || 0}`,
     homeTeamId: match.team1?.id || 0,
     awayTeamId: match.team2?.id || 0,
-    homeScore: null,
-    awayScore: null,
+    homeScore: match.team1_score || null,
+    awayScore: match.team2_score || null,
     status: getMatchStatus(match),
     time: formatTime(match.datetime) || '00:00',
     round: `${match.round_obj?.number || 1}. forduló`,
@@ -180,10 +180,19 @@ export const getMatchesByTeam = (matches: Match[], teamId: number): Match[] => {
   );
 };
 
+const getStandingById = (standings: Standing[], id: number): Standing | undefined => {
+  return Array.isArray(standings) ? standings.find(s => s.team_id === id) : undefined;
+};
+
 // Helper function to get team by ID from standings
 export const getTeamById = (standings: Standing[], id: number): Standing | undefined => {
-  return standings.find(standing => standing.team_id === id);
+  return getStandingById(standings, id);
 };
+
+// export const getTeamById = (id: number): Standing | undefined => {
+//   return standings.find((team) => team.id === id);
+// };
+
 
 // Helper function to get team by name from standings
 export const getTeamByName = (standings: Standing[], name: string): Standing | undefined => {

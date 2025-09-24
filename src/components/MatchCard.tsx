@@ -380,38 +380,17 @@ const MatchCard: React.FC<MatchCardProps> = ({
           </Box>
 
           {/* Score */}
-          <Box sx={{ textAlign: 'center', minWidth: 100 }}>
-            {match.status !== 'upcoming' ? (
-              <Typography 
-                variant="h2" 
-                sx={{ 
-                  fontWeight: 'bold', 
-                  color: '#e8eaed',
-                  lineHeight: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1,
-                  justifyContent: 'center'
-                }}
-              >
-                {match.homeScore}
-                <Typography variant="h4" sx={{ color: '#9aa0a6' }}>-</Typography>
-                {match.awayScore}
+          <Box sx={{ textAlign: 'center' }}>
+            <SoccerIcon sx={{ fontSize: 40, color: '#4285f4', mb: 1 }} />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                {match.team1_score}
               </Typography>
-            ) : (
-              <Box>
-                <SoccerIcon sx={{ fontSize: 40, color: '#4285f4', mb: 1 }} />
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    color: '#9aa0a6',
-                    fontWeight: 500
-                  }}
-                >
-                  VS
-                </Typography>
-              </Box>
-            )}
+              <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
+              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                {match.team2_score}
+              </Typography>
+            </Box>
           </Box>
 
           {/* Away Team */}

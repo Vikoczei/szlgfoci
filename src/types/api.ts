@@ -57,7 +57,15 @@ export interface ApiMatch {
   round_obj?: Round | null;
   referee?: Profile | null;
   events?: EventSchema[];
+  team1_score?: number | null;
+  team2_score?: number | null;
+  team1_yellow_cards?: number | null;
+  team2_yellow_cards?: number | null;
+  team1_red_cards?: number | null;
+  team2_red_cards?: number | null;
 }
+
+
 
 export interface Match {
   id: number;
@@ -66,6 +74,10 @@ export interface Match {
   team2: number;
   team1_score: number | null;
   team2_score: number | null;
+  team1_yellow_cards?: number | null;
+  team2_yellow_cards?: number | null;
+  team1_red_cards?: number | null;
+  team2_red_cards?: number | null;
   date: string;
   venue: string;
   referee: number | null;
@@ -82,6 +94,17 @@ export interface Match {
   status: 'upcoming' | 'live' | 'finished';
   events: MatchEvent[];
 }
+
+export async function getMatch(matchId: number) {
+  const res = await fetch(`/api/matches/${matchId}`);
+  const data = await res.json();
+  console.log("API RESPONSE in getMatch:", data); // <-- itt biztosan ki kell írnia
+  return data;
+}
+
+// gyors teszt
+getMatch(1); // Például a 1-es meccs lekérése
+
 
 export interface EventSchema {
   id?: number | null;
@@ -121,6 +144,7 @@ export interface StandingSchema {
   kapott: number;
   golarany: number;
   points: number;
+  position: number;
 }
 
 export interface Standing {

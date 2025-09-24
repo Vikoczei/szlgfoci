@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { use } from 'react';
 import {
   Box,
   Typography,
@@ -22,14 +22,16 @@ import {
 } from '@mui/icons-material';
 import { Match, getClassColor, getTeamById } from '@/utils/dataUtils';
 import LiveMatchTimer from './LiveMatchTimer';
+import { useTournamentData } from '@/hooks/useTournamentData';
 
 interface MatchDetailViewProps {
   match: Match;
 }
 
 const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
-  const homeTeam = getTeamById(match.homeTeamId);
-  const awayTeam = getTeamById(match.awayTeamId);
+  const { standings } = useTournamentData();
+  const homeTeam = getTeamById(standings, match.homeTeamId);
+  const awayTeam = getTeamById(standings, match.awayTeamId);
 
   const getEventIcon = (eventType: string) => {
     switch (eventType) {
@@ -187,37 +189,14 @@ const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
             </Box>
 
             {/* Score */}
-            <Box sx={{ textAlign: 'center', minWidth: 120 }}>
-              {match.status !== 'upcoming' && match.homeScore !== null && match.awayScore !== null ? (
-                <Box>
-                  <Typography 
-                    variant="h1" 
-                    sx={{ 
-                      fontWeight: 'bold', 
-                      color: '#e8eaed',
-                      lineHeight: 1,
-                      fontSize: '4rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 1
-                    }}
-                  >
-                    {match.homeScore}
-                    <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
-                    {match.awayScore}
-                  </Typography>
-                </Box>
-              ) : (
-                <Box>
-                  <Typography variant="h4" sx={{ color: '#4285f4', mb: 1 }}>
-                    ⚽
-                  </Typography>
-                  <Typography variant="h5" sx={{ color: '#9aa0a6', fontWeight: 500 }}>
-                    VS
-                  </Typography>
-                </Box>
-              )}
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                {match.team1_score}
+              </Typography>
+              <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
+              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                {match.team2_score}
+              </Typography>
             </Box>
 
             {/* Away Team */}
@@ -887,5 +866,6 @@ const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
     </Box>
   );
 };
+
 
 export default MatchDetailView;

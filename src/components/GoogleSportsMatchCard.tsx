@@ -122,29 +122,14 @@ const GoogleSportsMatchCard: React.FC<GoogleSportsMatchCardProps> = ({
             </Box>
 
             {/* Score */}
-            <Box sx={{ textAlign: 'center', minWidth: 80 }}>
-              {match.status !== 'upcoming' ? (
-                <Typography 
-                  variant="h3" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    color: '#e8eaed',
-                    lineHeight: 1
-                  }}
-                >
-                  {match.homeScore}
-                </Typography>
-              ) : (
-                <Typography 
-                  variant="h5" 
-                  sx={{ 
-                    color: '#9aa0a6',
-                    fontWeight: 500
-                  }}
-                >
-                  VS
-                </Typography>
-              )}
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                {match.team1_score}
+              </Typography>
+              <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
+              <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
+                {match.team2_score}
+              </Typography>
             </Box>
 
             {/* Away Team */}
