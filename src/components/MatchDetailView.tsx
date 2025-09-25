@@ -153,12 +153,12 @@ const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
           <Box sx={{ 
             display: 'grid', 
             gridTemplateColumns: '1fr auto 1fr', 
-            gap: 4, 
+            gap: 1, 
             alignItems: 'center',
             mb: 3
           }}>
             {/* Home Team */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Avatar
                 sx={{
                   width: 56,
@@ -190,14 +190,43 @@ const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
 
             {/* Score */}
             <Box sx={{ textAlign: 'center' }}>
-              {/* <SoccerIcon sx={{ fontSize: 40, color: '#4285f4', mb: 1 }} /> */}
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
-                  {match.team1_score === undefined ? match.team1_score : 0}
+              {/* <SoccerIcon sx={{ fontSize: { xs: 20, sm: 40 }, color: '#4285f4', mb: 1 }} /> */}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: { xs: 0.5, sm: 1.5 },
+                }}
+              >
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontWeight: 'bold',
+                    color: '#e8eaed',
+                    fontSize: { xs: '1.5rem', sm: '3.5rem', md: '4rem' },
+                  }}
+                >
+                  {match.team1_score === undefined ? match.team1_score : match.team1_score || 0}
                 </Typography>
-                <Typography variant="h3" sx={{ color: '#9aa0a6' }}>-</Typography>
-                <Typography variant="h1" sx={{ fontWeight: 'bold', color: '#e8eaed' }}>
-                  {match.team2_score === undefined ? match.team2_score : 0}
+                <Typography
+                  variant="h3"
+                  sx={{
+                    color: '#9aa0a6',
+                    fontSize: { xs: '1rem', sm: '2rem' },
+                  }}
+                >
+                  -
+                </Typography>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontWeight: 'bold',
+                    color: '#e8eaed',
+                    fontSize: { xs: '1.5rem', sm: '3.5rem', md: '4rem' },
+                  }}
+                >
+                  {match.team2_score === undefined ? match.team2_score : match.team2_score || 0}
                 </Typography>
               </Box>
             </Box>
@@ -206,7 +235,7 @@ const MatchDetailView: React.FC<MatchDetailViewProps> = ({ match }) => {
             <Box sx={{ 
               display: 'flex', 
               alignItems: 'center', 
-              gap: 2, 
+              gap: 1, 
               justifyContent: 'flex-end' 
             }}>
               <Box sx={{ textAlign: 'right' }}>
